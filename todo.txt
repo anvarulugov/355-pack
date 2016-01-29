@@ -1,0 +1,5 @@
+1. Text to speech
+2. Davlat tashkilotlari saytlariga havolalar widget
+3. Ob-havo widget
+4. Kurslar widget
+5. 
