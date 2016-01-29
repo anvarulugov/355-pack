@@ -38,9 +38,6 @@ class AUS_tb_options {
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
 	}
 
-
-
-
 	public function register_plugin_styles() {
 		wp_register_style( 'aus-accessibility',  AUSAY_URL.'/css/accessbility-style.css' );
 		wp_enqueue_style( 'aus-accessibility' );
@@ -158,7 +155,6 @@ class AUS_tb_options {
 	 */
 
 	public function initialize_plugin_options() {
-
 
 		add_settings_section(
 			$this->plugin_slug . '_plugin_settings_section',

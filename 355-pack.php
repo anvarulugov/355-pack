@@ -18,23 +18,47 @@ define( 'AUSAY_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
 include( AUSAY_DIR . '/class-options.php' );
 
 
+class TClick_pack {
 
-$causay_configs = array(
-	'plugin_slug' => 'aus_accessibility',
-	'plugin_name' => '№ 355 - Accessibility',
-);
-$aus_accessibility_object = new AUS_tb_options( $causay_configs );
+	public $configs;
 
-
-
-
-add_shortcode('aus_accessibility', function ($item=null) {
-	global $aus_accessibility_object;
-
-	if ($item) {
-		return $aus_accessibility_object->display_aus_accessibility_item($item['item']);
-	}else {
-		return $aus_accessibility_object->display_aus_accessibility();
+	/**
+	 * Class construction
+	 */
+	public function __construct() {
+		// Options class configs
+		$this->confis = array(
+			'plugin_slug' => 'tclick-pack',
+			'plugin_name' => 'TC 355 Pack',
+		);
+		// Initiating the Options class to generate plugin options page
+		new AUS_tb_options( $this->configs );
+		add_action( 'init', array( $this, 'init' ) );
 	}
-});
 
+	/**
+	 * Class init
+	 * @return [initiating] [Fires on Wordpress init stage]
+	 */
+	public function init() {
+		add_shortcode( 'tc-flags', array( $this, 'flags_shortcode' ) );
+		add_shortcode( 'tc-ac-modes', array( $this, 'accessibility_shortcode' ) );
+	}
+
+	public function scripts() {
+
+	}
+
+	public function widgets_load() {
+
+	}
+
+	public function flags_shortcode() {
+
+	}
+
+	public function accessibility_shortcode() {
+
+	}
+
+}
