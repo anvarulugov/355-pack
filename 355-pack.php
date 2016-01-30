@@ -27,7 +27,7 @@ class TClick_pack {
 	 */
 	public function __construct() {
 		// Options class configs
-		$this->confis = array(
+		$this->configs = array(
 			'plugin_slug' => 'tclick-pack',
 			'plugin_name' => 'TC 355 Pack',
 		);

@@ -31,7 +31,7 @@ class AUS_tb_options {
 			$this->plugin_name = $this->configs['plugin_name'];
 		}
 
-		$this->developer_mode = false;
+		$this->developer_mode = true;
 		add_action( 'admin_menu', array( $this, 'create_menu_page' ) );
 		add_action( 'admin_init', array( $this, 'initialize_plugin_options' ) );
 
@@ -53,8 +53,8 @@ class AUS_tb_options {
 
 	public function create_menu_page() {
 		add_options_page( 
-			__( 'TC № 355 Pack', 'aus-basic' ),
-			__( 'TC № 355 Pack' , 'aus-basic' ),
+			__( '355 Pack', 'aus-basic' ),
+			__( '355 Pack' , 'aus-basic' ),
 			'manage_options', 
 			$this->plugin_slug . '_plugin_options', 
 			array( $this, 'menu_page_display' )
