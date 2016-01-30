@@ -41,8 +41,8 @@ class TClick_pack {
 	 * @return [initiating] [Fires on Wordpress init stage]
 	 */
 	public function init() {
-		add_shortcode( 'tc-flags', array( $this, 'flags_shortcode' ) );
-		add_shortcode( 'tc-ac-modes', array( $this, 'accessibility_shortcode' ) );
+		add_shortcode( '[tc-flags]', array( $this, 'flags_shortcode' ) );
+		add_shortcode( '[tc-ac-modes]', array( $this, 'accessibility_shortcode' ) );
 	}
 
 	public function scripts() {
@@ -57,8 +57,32 @@ class TClick_pack {
 
 	}
 
-	public function accessibility_shortcode() {
+	public function accessibility_shortcode($item=null) {
+		$aus_accessibility_object = new AUS_tb_options($this->configs);
 
+		if ($item) {
+			return $aus_accessibility_object->display_aus_accessibility_item($item['item']);
+		}else {
+			return $aus_accessibility_object->display_aus_accessibility();
+		}
 	}
 
 }
+
+$r =  new TClick_pack();
+
+//
+//add_shortcode( 'aus_accessibility',function($item=null){
+//
+//	$causay_configs = array(
+//		'plugin_slug' => 'tclick-pack',
+//		'plugin_name' => 'TC 355 Pack',
+//	);
+//	$aus_accessibility_objecte = new AUS_tb_options($causay_configs);
+//	if ($item) {
+//
+//		return $aus_accessibility_objecte->display_aus_accessibility_item($item['item']);
+//	}else {
+//		return $aus_accessibility_objecte->display_aus_accessibility();
+//	}
+//} );

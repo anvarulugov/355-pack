@@ -8,9 +8,9 @@
  * @link http://codex.wordpress.org/Creating_Options_Pages
  *
  * @package WordPress
- * @subpackage AUS Bsic Options
- * @since AUS Bsic 0.1.1
- * @author Anvar Ulugov
+ * @subpackage AUS Basic Options
+ * @since AUS Basic 1.0.0
+ * @author Dilshod Uktamov, Anvar Ulugov
  * @license GPL2
  */
 
@@ -39,11 +39,11 @@ class AUS_tb_options {
 	}
 
 	public function register_plugin_styles() {
-		wp_register_style( 'aus-accessibility',  AUSAY_URL.'/css/accessbility-style.css' );
-		wp_enqueue_style( 'aus-accessibility' );
+		wp_register_style( 'tclick-pack',  AUSAY_URL.'/css/accessbility-style.css' );
+		wp_enqueue_style( 'tclick-pack' );
 
-		wp_register_script( 'aus-accessibility', AUSAY_URL . '/js/accessibility-js.js',[],'0.0.1',true);
-		wp_enqueue_script( 'aus-accessibility' );
+		wp_register_script( 'tclick-pack', AUSAY_URL . '/js/accessibility-js.js',[],'1.0.0',true);
+		wp_enqueue_script( 'tclick-pack' );
 
 	}
 
@@ -53,8 +53,8 @@ class AUS_tb_options {
 
 	public function create_menu_page() {
 		add_options_page( 
-			__( '№ 355 - Accessibility', 'aus-basic' ),
-			__( '№ 355 - Accessibility' , 'aus-basic' ),
+			__( 'TC № 355 Pack', 'aus-basic' ),
+			__( 'TC № 355 Pack' , 'aus-basic' ),
 			'manage_options', 
 			$this->plugin_slug . '_plugin_options', 
 			array( $this, 'menu_page_display' )
@@ -75,21 +75,17 @@ class AUS_tb_options {
 		<h2><?php echo sprintf( __( '%s Options', 'aus-basic' ), $this->plugin_name ); ?></h2>
 			<h4>Those accessibilities was produced by № 355 decision of Republic of Uzbekistan. Enjoy!</h4>
 			<div class="how-to-use-accessibility" >
-
 				<section style="width: 100%">
 					<h3 style="padding-left:10px;">How to use:</h3>
 					<ul style="margin-left:35px; list-style-type:square; margin-bottom: 20px;">
 						<li><b>Step 1:</b> Set settings you want to use.</li>
 						<li><b>Step 2:</b> To use All accessibilities  copy bellow shortcode and paste  (Inside html page: <i class="text-danger-accessiblity"><code>[shortcode_name]</code></i>, Inside code:  <i class="text-danger-accessiblity"><code>  echo do_shortcode('[shortcode_name name]');</code></i> ) anywhere on your site, or in any template file.</li>
 						<li style="list-style-type:none !important; display:block;margin-top:.75em;">
-							<b><i class="text-danger-accessiblity">Shortcode:</b></i>&nbsp;&nbsp;&nbsp;&nbsp; <i><code>[aus_accessibility]</code></i>
+							<b><i class="text-danger-accessiblity">Shortcode:</b></i>&nbsp;&nbsp;&nbsp;&nbsp; <i><code>[tc-ac-modes]</code></i>
 						</li>
 						<li><b>Step 3:</b> To use accessibility each one copy its shortcode and paste  (Inside html page: <i class="text-danger-accessiblity">[shortcode_name item=item_name]</i>, Inside code:  <i class="text-danger-accessiblity"><code> echo do_shortcode('[shortcode_name item=item_name]');</code></i> ) anywhere on your site, or in any template file.</li>
-
 					</ul>
-
 				</section>
-
 			</div>
 		<form action="options.php" method="post" style="padding: 20px;">
 		<?php settings_fields( $this->plugin_slug . '_plugin_options_group' ); ?>
@@ -190,7 +186,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'contact_page_id',
 				'type' => 'pages',
-				'description' => __( 'Pelase, select contact page. If it isn\'t selected, it will not display.  <b class="text-danger-accessiblity">Shortcode:</b> <code>[aus_accessibility item="contact"]</code>', 'aus-basic' ),
+				'description' => __( 'Pelase, select contact page. If it isn\'t selected, it will not display.  <b class="text-danger-accessiblity">Shortcode:</b> <code>[tc-ac-modes item="contact"]</code>', 'aus-basic' ),
 			)
 		);
 
@@ -203,7 +199,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'sitemap_page_id',
 				'type' => 'pages',
-				'description' => __( 'Pelase, select sitemap page. If it isn\'t selected, it will not display.  <b class="text-danger-accessiblity">Shortcode:</b> <code>[aus_accessibility item="site-map"]</code>', 'aus-basic' ),
+				'description' => __( 'Pelase, select sitemap page. If it isn\'t selected, it will not display.  <b class="text-danger-accessiblity">Shortcode:</b> <code>[tc-ac-modes item="site-map"]</code>', 'aus-basic' ),
 			)
 		);
 
@@ -216,7 +212,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'rss_page_id',
 				'type' => 'checkbox',
-				'description' => __( 'Pelase, check to use this section  <b class="text-danger-accessiblity">Shortcode:</b> <code>[aus_accessibility item="rss"]</code> ', 'aus-basic' ),
+				'description' => __( 'Pelase, check to use this section  <b class="text-danger-accessiblity">Shortcode:</b> <code>[tc-ac-modes item="rss"]</code> ', 'aus-basic' ),
 			)
 		);
 		add_settings_field(
@@ -228,7 +224,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'voice_page_id',
 				'type' => 'checkbox',
-				'description' => __( 'Pelase, check to use Voice section. <b class="text-danger-accessiblity">Shortcode:</b><code> [aus_accessibility item="voice"]</code> ', 'aus-basic' ),
+				'description' => __( 'Pelase, check to use Voice section. <b class="text-danger-accessiblity">Shortcode:</b><code> [tc-ac-modes item="voice"]</code> ', 'aus-basic' ),
 			)
 		);
 		add_settings_field(
@@ -240,7 +236,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'mobile_page_id',
 				'type' => 'checkbox',
-				'description' => __( 'Pelase, check to use Mobile section. <b class="text-danger-accessiblity">Shortcode:</b> <code>[aus_accessibility item="mobile"]</code> ', 'aus-basic' ),
+				'description' => __( 'Pelase, check to use Mobile section. <b class="text-danger-accessiblity">Shortcode:</b> <code>[tc-ac-modes item="mobile"]</code> ', 'aus-basic' ),
 			)
 		);
 
@@ -266,7 +262,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'search_page_id',
 				'type' => 'radio',
-				'description' => __( '<b class="text-danger-accessiblity">Shortcodes:</b><code> [aus_accessibility item="search-animate"]</code> , <code> [aus_accessibility item="search-modal"]</code>    ', 'aus-basic' ),
+				'description' => __( '<b class="text-danger-accessiblity">Shortcodes:</b><code> [tc-ac-modes item="search-animate"]</code> , <code> [tc-ac-modes item="search-modal"]</code>    ', 'aus-basic' ),
 				'options'=>[
 					1=>'Animate search',
 					2=>'Modal search',
@@ -283,7 +279,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'blind_mode',
 				'type' => 'checkbox',
-				'description' => __( 'Pelase, check to use blind mode. <b class="text-danger-accessiblity">Shortcode:</b><code> [aus_accessibility item="blind"]</code>  ', 'aus-basic' ),
+				'description' => __( 'Pelase, check to use blind mode. <b class="text-danger-accessiblity">Shortcode:</b><code> [tc-ac-modes item="blind"]</code>  ', 'aus-basic' ),
 			)
 		);
 
@@ -338,13 +334,13 @@ class AUS_tb_options {
 		);
 
 		add_settings_field(
-			'accessibility_plugin_position-language',
-			'<label for="accessibility_plugin_position-language">' . __( 'Accessibility Language position in page', 'aus-basic' ) . '</label>',
+			'position_language',
+			'<label for="position_language">' . __( 'Accessibility Language position in page', 'aus-basic' ) . '</label>',
 			array( $this, 'input'),
 			$this->plugin_slug . '_plugin_options',
 			$this->plugin_slug . '_plugin_settings_section',
 			array(
-				'id' => 'accessibility_plugin_position-language',
+				'id' => 'position_language',
 				'type' => 'select',
 				'description' => __( 'Pelase, select position', 'aus-basic' ),
 				'options'=>[
@@ -364,7 +360,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'language_uz',
 				'type' => 'checkbox',
-				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code> [aus_accessibility item="uz"] </code>  ', 'aus-basic' ),
+				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code> [tc-ac-modes item="uz"] </code>  ', 'aus-basic' ),
 			)
 		);
 
@@ -378,7 +374,7 @@ class AUS_tb_options {
 //			array(
 //				'id' => 'language_uzkr',
 //				'type' => 'checkbox',
-//				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code>[aus_accessibility item="uzkr"] </code>  ', 'aus-basic' ),
+//				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code>[tc-ac-modes item="uzkr"] </code>  ', 'aus-basic' ),
 //			)
 //		);
 		add_settings_field(
@@ -390,7 +386,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'language_ru',
 				'type' => 'checkbox',
-				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code>[aus_accessibility item="ru"] </code>  ', 'aus-basic' ),
+				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code>[tc-ac-modes item="ru"] </code>  ', 'aus-basic' ),
 			)
 		);
 		add_settings_field(
@@ -402,7 +398,7 @@ class AUS_tb_options {
 			array(
 				'id' => 'language_en',
 				'type' => 'checkbox',
-				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code>[aus_accessibility item="en"] </code>  ', 'aus-basic' ),
+				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code>[tc-ac-modes item="en"] </code>  ', 'aus-basic' ),
 			)
 		);
 
@@ -674,44 +670,44 @@ class AUS_tb_options {
 
 	public function display_aus_accessibility ()
 	{
-		if(get_option('aus_accessibility_plugin_options')){ ?>
+		if($this->options){ ?>
 			<div style="clear: both"></div>
-			<?php if(get_option('aus_accessibility_plugin_options')['language_page_id']): ?>
-			<div class="main-accessibility pull-<?=get_option('aus_accessibility_plugin_options')['accessibility_plugin_position-language']?>" >
-				<?php $style =  get_option('aus_accessibility_plugin_options')['bootstrap_style_page_id']?>
+			<?php if($this->options['language_page_id']): ?>
+			<div class="main-accessibility pull-<?=$this->options['position_language']?>" >
+				<?php $style =  $this->options['bootstrap_style_page_id']?>
 				<ul>
-					<?php if( get_option('aus_accessibility_plugin_options')['language_uz']): ?>
+					<?php if( $this->options['language_uz']): ?>
 						<li class="accessibility-language lang-uz">
 							<a href="<?= get_bloginfo('wpurl')?>/uz/" hreflang="uz" title="O'zbekcha (uz)" class="qtranxs_image <?= get_bloginfo('language')=='uz'?'active':'' ?> qtranxs_image_uz btn-<?= $style ?>">
 								<img style="display: <?php
-									 if (get_option('aus_accessibility_plugin_options')['language_show']=='image' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+									 if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 									 }else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/uz.gif" alt="O'zbekcha (uz)">
 								<span   style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='text' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" >O'zbekcha</span>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if( get_option('aus_accessibility_plugin_options')['language_ru']): ?>
+					<?php if( $this->options['language_ru']): ?>
 						<li class="accessibility-language lang-ru">
 							<a href="<?= get_bloginfo('wpurl')?>/ru/" hreflang="ru" title="Русский (ru)" class="<?= get_bloginfo('language')=='ru-RU'?'active':'' ?> qtranxs_image qtranxs_image_ru btn-<?= $style ?>">
 								<img style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='image' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/ru.gif" alt="Русский (ru)">
 								<span style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='text' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" >Русский</span>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if( get_option('aus_accessibility_plugin_options')['language_en']): ?>
+					<?php if( $this->options['language_en']): ?>
 						<li class="accessibility-language lang-en">
 							<a href="<?= get_bloginfo('wpurl')?>/en/" hreflang="ru" title="English (en)" class="qtranxs_image qtranxs_image_en <?= get_bloginfo('language')=='en-US'?'active':'' ?> btn-<?= $style ?>">
 								<img style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='image' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/en.gif" alt="English (en)">
 								<span   style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='text' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" >English </span>
 							</a>
 						</li>
@@ -720,25 +716,25 @@ class AUS_tb_options {
 			</div>
 			<?php endif; ?>
 
-			<div class="main-accessibility pull-<?=get_option('aus_accessibility_plugin_options')['accessibility_plugin_position']?>" >
-				<?php $style =  get_option('aus_accessibility_plugin_options')['bootstrap_style_page_id']?>
+			<div class="main-accessibility pull-<?=$this->options['accessibility_plugin_position']?>" >
+				<?php $style =  $this->options['bootstrap_style_page_id']?>
 				<ul>
 
-					<?php if(get_option('aus_accessibility_plugin_options')['rss_page_id']): ?>
+					<?php if($this->options['rss_page_id']): ?>
 						<li class="accessibility-rss">
 							<a class="btn btn-<?= $style ?>" href="<?= get_bloginfo('rss_url')?>">
 								<i class="fa fa-rss"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['voice_page_id']): ?>
+					<?php if($this->options['voice_page_id']): ?>
 						<li class="accessibility-bullhorn">
 							<a class="btn btn-<?= $style ?>"  href="#" data-toggle="modal" data-target="#bullhornModal">
 								<i class="glyphicon glyphicon-bullhorn"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['mobile_page_id']): ?>
+					<?php if($this->options['mobile_page_id']): ?>
 						<li class="accessibility-mobile">
 							<a href="#" class="btn btn-<?= $style ?>"
 									onclick="window.open(window.location,'mobile','location=1, scrollbars=1, toolbar=1, resizable=1, width=450, height=1000')">
@@ -746,21 +742,21 @@ class AUS_tb_options {
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['sitemap_page_id']): ?>
+					<?php if($this->options['sitemap_page_id']): ?>
 						<li class="accessibility-sitemap">
-							<a class="btn btn-<?= $style ?>" href="<?php echo get_option('aus_accessibility_plugin_options')['sitemap_page_id'] ?>">
+							<a class="btn btn-<?= $style ?>" href="<?php echo $this->options['sitemap_page_id'] ?>">
 								<i class="fa fa-sitemap"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['contact_page_id']): ?>
+					<?php if($this->options['contact_page_id']): ?>
 						<li class="accessibility-contact">
-							<a class="btn btn-<?= $style ?>" href="<?= get_option('aus_accessibility_plugin_options')['contact_page_id']?>">
+							<a class="btn btn-<?= $style ?>" href="<?= $this->options['contact_page_id']?>">
 								<i class="glyphicon glyphicon-envelope"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['blind_mode']): ?>
+					<?php if($this->options['blind_mode']): ?>
 						<li class="accessibility-blend">
 							<div class="dropdown" >
 								<a href="#" class="btn btn-<?= $style ?> dropdown-toggle dropdown-accessibility"  id="menu1"  type="button" data-toggle="dropdown" ><i class="glyphicon glyphicon-eye-open"></i>
@@ -782,14 +778,14 @@ class AUS_tb_options {
 						</li>
 					<?php endif;?>
 
-					<?php if(get_option('aus_accessibility_plugin_options')['search_page_id_check'] and get_option('aus_accessibility_plugin_options')['search_page_id'] and get_option('aus_accessibility_plugin_options')['search_page_id']==2): ?>
+					<?php if($this->options['search_page_id_check'] and $this->options['search_page_id'] and $this->options['search_page_id']==2): ?>
 						<li class="accessibility-search">
 							<a  data-toggle="modal" data-target="#searchModal" data-id="<?= $style ?>" class="search-toggler btn btn-<?= $style ?>  search-button-blur">
 								<i class="glyphicon glyphicon-search"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['search_page_id_check'] and get_option('aus_accessibility_plugin_options')['search_page_id'] and get_option('aus_accessibility_plugin_options')['search_page_id']==1): ?>
+					<?php if($this->options['search_page_id_check'] and $this->options['search_page_id'] and $this->options['search_page_id']==1): ?>
 						<li class="accessibility-search">
 							<form method="get" role="form" id="searchform" action="<?php bloginfo('home'); ?>/">
 								<div id="hidden-search" style="display: inline-block">
@@ -803,9 +799,13 @@ class AUS_tb_options {
 					<?php endif;?>
 				</ul>
 
-				<?php if(get_option('aus_accessibility_plugin_options')['voice_page_id']):?>
+				<?php if($this->options['voice_page_id']):?>
 				<!-- Modal -->
 				<div id="bullhornModal" class="modal fade" role="dialog">
+					<button id="btn-voice" style="display: none;" class="btn btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
+						<i class="glyphicon glyphicon-bullhorn"></i>
+					</button>
+					<section id="voice-section" style="display: none"></section>
 					<div class="modal-dialog">
 						<!-- Modal content-->
 						<div class="modal-content">
@@ -830,49 +830,49 @@ class AUS_tb_options {
 
 	public function display_aus_accessibility_item ($item)
 	{
-		if(get_option('aus_accessibility_plugin_options')){ ?>
+		if($this->options){ ?>
 			<div class="main-accessibility main-accessibility-item " >
-				<?php $style =  get_option('aus_accessibility_plugin_options')['bootstrap_style_page_id']?>
+				<?php $style =  $this->options['bootstrap_style_page_id']?>
 				<ul>
 
-					<?php if( get_option('aus_accessibility_plugin_options')['language_uz'] and $item=='uz'): ?>
+					<?php if( $this->options['language_uz'] and $item=='uz'): ?>
 						<li class="accessibility-language lang-uz">
 							<a href="<?= get_bloginfo('wpurl')?>/uz/" hreflang="uz" title="O'zbekcha (uz)" class="<?= get_bloginfo('language')=='uz'?'active':'' ?> qtranxs_image qtranxs_image_uz btn-<?= $style ?>">
 								<img style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='image' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/uz.gif" alt="O'zbekcha (uz)">
 								<span  style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='text' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" >O'zbekcha</span>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if( get_option('aus_accessibility_plugin_options')['language_ru'] and $item=='ru'): ?>
+					<?php if( $this->options['language_ru'] and $item=='ru'): ?>
 						<li class="accessibility-language lang-ru">
 							<a href="<?= get_bloginfo('wpurl')?>/ru/" hreflang="ru" title="Русский (ru)" class="<?= get_bloginfo('language')=='ru-RU'?'active':'' ?> qtranxs_image qtranxs_image_ru btn-<?= $style ?>">
 								<img style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='image' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/ru.gif" alt="Русский (ru)">
 								<span style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='text' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" >Русский</span>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if( get_option('aus_accessibility_plugin_options')['language_en'] and $item=='en'): ?>
+					<?php if( $this->options['language_en'] and $item=='en'): ?>
 						<li class="accessibility-language lang-en">
 							<a href="<?= get_bloginfo('wpurl')?>/en/" hreflang="ru" title="English (en)" class="<?= get_bloginfo('language')=='en-US'?'active':'' ?> qtranxs_image qtranxs_image_en  btn-<?= $style ?>">
 								<img style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='image' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/en.gif" alt="English (en)">
 								<span style="display: <?php
-								if (get_option('aus_accessibility_plugin_options')['language_show']=='text' or get_option('aus_accessibility_plugin_options')['language_show']=='image_text' ){echo 'inline-block';
+								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
 								}else{ echo 'none';}?>" >English </span>
 							</a>
 						</li>
 					<?php endif;?>
 
-					<?php if(get_option('aus_accessibility_plugin_options')['rss_page_id'] and $item=='rss'): ?>
+					<?php if($this->options['rss_page_id'] and $item=='rss'): ?>
 						<li class="accessibility-rss">
 							<a class="btn btn-<?= $style ?>" href="<?= get_bloginfo('rss_url')?>">
 								<i class="fa fa-rss"></i>
@@ -880,14 +880,14 @@ class AUS_tb_options {
 						</li>
 					<?php endif;?>
 
-					<?php if(get_option('aus_accessibility_plugin_options')['voice_page_id'] and $item=='voice'): ?>
+					<?php if($this->options['voice_page_id'] and $item=='voice'): ?>
 						<li class="accessibility-bullhorn">
 							<a class="btn btn-<?= $style ?>"  href="#" data-toggle="modal" data-target="#bullhornModal">
 								<i class="glyphicon glyphicon-bullhorn"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['mobile_page_id'] and $item=='mobile'): ?>
+					<?php if($this->options['mobile_page_id'] and $item=='mobile'): ?>
 						<li class="accessibility-mobile">
 							<a href="#" class="btn btn-<?= $style ?>"
 									onclick="window.open(window.location,'mobile','location=1, scrollbars=1, toolbar=1, resizable=1, width=450, height=1000')">
@@ -895,21 +895,21 @@ class AUS_tb_options {
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['sitemap_page_id'] and $item=='site-map'): ?>
+					<?php if($this->options['sitemap_page_id'] and $item=='site-map'): ?>
 						<li class="accessibility-sitemap">
-							<a class="btn btn-<?= $style ?>" href="<?php echo get_option('aus_accessibility_plugin_options')['sitemap_page_id'] ?>">
+							<a class="btn btn-<?= $style ?>" href="<?php echo $this->options['sitemap_page_id'] ?>">
 								<i class="fa fa-sitemap"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['contact_page_id'] and $item=='contact'): ?>
+					<?php if($this->options['contact_page_id'] and $item=='contact'): ?>
 						<li class="accessibility-contact">
-							<a class="btn btn-<?= $style ?>" href="<?= get_option('aus_accessibility_plugin_options')['contact_page_id']?>">
+							<a class="btn btn-<?= $style ?>" href="<?= $this->options['contact_page_id']?>">
 								<i class="glyphicon glyphicon-envelope"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['blind_mode'] and $item=='blind'): ?>
+					<?php if($this->options['blind_mode'] and $item=='blind'): ?>
 						<li class="accessibility-blend">
 							<div class="dropdown" >
 								<a class="btn btn-<?= $style ?> dropdown-toggle dropdown-accessibility"  id="menu1"  type="button" data-toggle="dropdown" ><i class="glyphicon glyphicon-eye-open"></i>
@@ -931,14 +931,14 @@ class AUS_tb_options {
 						</li>
 					<?php endif;?>
 
-					<?php if(get_option('aus_accessibility_plugin_options')['search_page_id_check'] and get_option('aus_accessibility_plugin_options')['search_page_id'] and get_option('aus_accessibility_plugin_options')['search_page_id']==2 and $item=='search-modal'): ?>
+					<?php if($this->options['search_page_id_check'] and $this->options['search_page_id'] and $this->options['search_page_id']==2 and $item=='search-modal'): ?>
 						<li class="accessibility-search">
 							<a  data-toggle="modal" data-target="#searchModal" data-id="<?= $style ?>" class="search-toggler btn btn-<?= $style ?>  search-button-blur">
 								<i class="glyphicon glyphicon-search"></i>
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if(get_option('aus_accessibility_plugin_options')['search_page_id_check'] and get_option('aus_accessibility_plugin_options')['search_page_id'] and get_option('aus_accessibility_plugin_options')['search_page_id']==1 and $item=='search-animate'): ?>
+					<?php if($this->options['search_page_id_check'] and $this->options['search_page_id'] and $this->options['search_page_id']==1 and $item=='search-animate'): ?>
 						<li class="accessibility-search">
 							<form method="get" role="form" id="searchform" action="<?php bloginfo('home'); ?>/">
 								<div id="hidden-search" style="display: inline-block">
@@ -953,7 +953,11 @@ class AUS_tb_options {
 				</ul>
 
 				<!-- Modal -->
-			<?php if(get_option('aus_accessibility_plugin_options')['voice_page_id'] and $item=='voice'):?>
+			<?php if($this->options['voice_page_id'] and $item=='voice'):?>
+				<button id="btn-voice" style="display: none;" class="btn btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
+					<i class="glyphicon glyphicon-bullhorn"></i>
+				</button>
+				<section id="voice-section" style="display: none"></section>
 				<div id="bullhornModal" class="modal fade" role="dialog">
 					<div class="modal-dialog">
 						<!-- Modal content-->
