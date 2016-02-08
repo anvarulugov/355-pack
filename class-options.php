@@ -31,7 +31,7 @@ class AUS_tb_options {
 			$this->plugin_name = $this->configs['plugin_name'];
 		}
 
-		$this->developer_mode = true;
+		$this->developer_mode = false;
 		add_action( 'admin_menu', array( $this, 'create_menu_page' ) );
 		add_action( 'admin_init', array( $this, 'initialize_plugin_options' ) );
 
@@ -42,8 +42,27 @@ class AUS_tb_options {
 		wp_register_style( 'tclick-pack',  AUSAY_URL.'/css/accessbility-style.css' );
 		wp_enqueue_style( 'tclick-pack' );
 
-		wp_register_script( 'tclick-pack', AUSAY_URL . '/js/accessibility-js.js',[],'1.0.0',true);
-		wp_enqueue_script( 'tclick-pack' );
+		if ($this->options['font_awesome']) {
+			wp_register_style('tclick-awesome', AUSAY_URL . '/css/font-awesome.min.css', [], '1.0.0', true);
+			wp_enqueue_style('tclick-awesome');
+		}
+
+		wp_register_script( 'tclick-pack-main', AUSAY_URL . '/js/accessibility-js.js',[],'1.0.0',true);
+		wp_enqueue_script( 'tclick-pack-main' );
+
+
+		if ($this->options['voice_type']=='google') {
+			wp_register_script( 'tclick-pack-google', AUSAY_URL . '/js/google-translate-voice.js',[],'1.0.0',true);
+			wp_enqueue_script( 'tclick-pack-google' );
+		}if ($this->options['voice_type']=='gspeech') {
+			wp_register_script( 'tclick-pack-gspeech', AUSAY_URL . '/js/gspeech-voice.js',[],'1.0.0',true);
+			wp_enqueue_script( 'tclick-pack-gspeech' );
+		}if ($this->options['voice_type']=='responsive') {
+			wp_register_script( 'tclick-pack-responsive-main', 'http://code.responsivevoice.org/responsivevoice.js',[],'1.0.0',true);
+			wp_register_script( 'tclick-pack-responsive', AUSAY_URL . '/js/resvonsive-voice.js',[],'1.0.0',true);
+			wp_enqueue_script( 'tclick-pack-responsive-main' );
+			wp_enqueue_script( 'tclick-pack-responsive' );
+		}
 
 	}
 
@@ -178,6 +197,19 @@ class AUS_tb_options {
 
 
 		add_settings_field(
+			'font_awesome',
+			'<label for="font_awesome">' . __( 'Font Awesome', 'aus-basic' ) . '</label>',
+			array( $this, 'input'),
+			$this->plugin_slug . '_plugin_options',
+			$this->plugin_slug . '_plugin_settings_section',
+			array(
+				'id' => 'font_awesome',
+				'type' => 'checkbox',
+				'description' => __( 'Pelase, check to use Font Awesome Icons ', 'aus-basic'),
+			)
+		);
+
+		add_settings_field(
 			'contact_page_id',
 			'<label for="contact_page_id">' . __( 'Contact page', 'aus-basic' ) . '</label>',
 			array( $this, 'input'),
@@ -224,9 +256,31 @@ class AUS_tb_options {
 			array(
 				'id' => 'voice_page_id',
 				'type' => 'checkbox',
-				'description' => __( 'Pelase, check to use Voice section. <b class="text-danger-accessiblity">Shortcode:</b><code> [tc-ac-modes item="voice"]</code> ', 'aus-basic' ),
+				'description' => __( 'Pelase, check to use Voice section.', 'aus-basic' ),
 			)
 		);
+
+
+		add_settings_field(
+			'voice_type',
+			'<label for="voice_type">' . __( 'Voice type', 'aus-basic' ) . '</label>',
+			array( $this, 'input'),
+			$this->plugin_slug . '_plugin_options',
+			$this->plugin_slug . '_plugin_settings_section',
+			array(
+				'id' => 'voice_type',
+				'type' => 'radio',
+				'description' => __( '<b class="text-danger-accessiblity">Shortcode:</b><code>[tc-ac-modes item="voice"] </code>  ', 'aus-basic' ),
+				'options'=>[
+					'google'=>'Google Voice',
+					'responsive'=>'Responsive Voice',
+					'gspeech'=>'GSpeech Voice',
+				]
+			)
+		);
+
+
+
 		add_settings_field(
 			'mobile_page_id',
 			'<label for="mobile_page_id">' . __( 'Mobile section', 'aus-basic' ) . '</label>',
@@ -304,20 +358,6 @@ class AUS_tb_options {
 				]
 			)
 		);
-
-//		add_settings_field(
-//			'custom_css',
-//			'<label for="bot_token">' . __( 'Custom CSS', 'aus-basic' ) . '</label>',
-//			array( $this, 'input'),
-//			$this->plugin_slug . '_plugin_options',
-//			$this->plugin_slug . '_plugin_settings_section',
-//			array(
-//				'id' => 'custom_css',
-//				'type' => 'textarea',
-//				'description' => __( 'Custom css to change design of blind mode', 'aus-basic' ),
-//
-//			)
-//		);
 
 
 		add_settings_field(
@@ -801,11 +841,14 @@ class AUS_tb_options {
 
 				<?php if($this->options['voice_page_id']):?>
 				<!-- Modal -->
-				<div id="bullhornModal" class="modal fade" role="dialog">
-					<button id="btn-voice" style="display: none;" class="btn btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
+				<div id="btn-voice" class="modal fade" role="dialog">
+					<button  sty le="display: none;" role="dialog" class="btn btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
 						<i class="glyphicon glyphicon-bullhorn"></i>
 					</button>
 					<section id="voice-section" style="display: none"></section>
+				</div>
+				<div id="bullhornModal" class="modal fade" role="dialog">
+
 					<div class="modal-dialog">
 						<!-- Modal content-->
 						<div class="modal-content">
@@ -954,10 +997,11 @@ class AUS_tb_options {
 
 				<!-- Modal -->
 			<?php if($this->options['voice_page_id'] and $item=='voice'):?>
-				<button id="btn-voice" style="display: none;" class="btn btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
+				<button id="btn-voice" style="display: none;" role="dialog" class="modal fade btn btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
 					<i class="glyphicon glyphicon-bullhorn"></i>
 				</button>
 				<section id="voice-section" style="display: none"></section>
+
 				<div id="bullhornModal" class="modal fade" role="dialog">
 					<div class="modal-dialog">
 						<!-- Modal content-->
