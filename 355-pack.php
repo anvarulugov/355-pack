@@ -36,34 +36,11 @@ class TClick_pack {
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
-	/**
-	 * Class init
-	 * @return [initiating] [Fires on Wordpress init stage]
-	 */
+
+
 	public function init() {
 		add_shortcode( 'tc-ac-modes', array( $this, 'accessibility_shortcode' ) );
-//		add_shortcode('show_languages', function () {
-//			global $q_config;
-////			echo "<pre>";
-////			print_r($q_config);
-////			exit;
-//			if (is_404()) {
-//				$url = get_option('home');
-//			}else{ $url = '';}
-//			$flag_location = qtranxf_flag_location();
-//			$html = "";
-//			foreach ($qtranxf_getSortedLanguages() as $language) {
-//				$classes = ['lang-' . $language];
-//				if ($language == $q_config['language']) {
-//					$classes[] = 'active';
-//				}
-//				$html .= '<a class="' . implode('', $classes) . '" href="' . $qtranxf_convertURL($url, $language, false, true) . '"
-//							 hreflang="' . $language . '" title="' . $q_config['language_name'][$language] . '">
-//							 <img src="' . $flag_location . $q_config['flag'][$language] . '" alt="' . $q_config['language_name'][$language] . '" />
-//						  </a>';
-//			}
-//			return $html;
-//		});
+
 	}
 
 	public function scripts() {
@@ -87,19 +64,3 @@ class TClick_pack {
 }
 
 $r =  new TClick_pack();
-
-//
-//add_shortcode( 'aus_accessibility',function($item=null){
-//
-//	$causay_configs = array(
-//		'plugin_slug' => 'tclick-pack',
-//		'plugin_name' => 'TC 355 Pack',
-//	);
-//	$aus_accessibility_objecte = new AUS_tb_options($causay_configs);
-//	if ($item) {
-//
-//		return $aus_accessibility_objecte->display_aus_accessibility_item($item['item']);
-//	}else {
-//		return $aus_accessibility_objecte->display_aus_accessibility();
-//	}
-//} );
