@@ -716,39 +716,65 @@ class AUS_tb_options {
 			<div class="main-accessibility pull-<?=$this->options['position_language']?>" >
 				<?php $style =  $this->options['bootstrap_style_page_id']?>
 				<ul>
+					<?php
+
+					global $q_config;
+
+					?>
 					<?php if( $this->options['language_uz']): ?>
 						<li class="accessibility-language lang-uz">
-							<a href="<?= get_bloginfo('wpurl')?>/uz/" hreflang="uz" title="O'zbekcha (uz)" class="qtranxs_image <?= get_bloginfo('language')=='uz'?'active':'' ?> qtranxs_image_uz btn-<?= $style ?>">
+							<?php $mode = $q_config['url_mode'];
+							if ($mode==1) {
+								$mode = $q_config['url_info']['scheme'].'://'.$q_config['url_info']['host'].$q_config['url_info']['wp-path'].'?lang=uz';
+							}else{
+								$mode = $q_config['url_info']['scheme'].'://'.$q_config['url_info']['host'].'/uz'.$q_config['url_info']['wp-path'];
+							}
+							?>
+							<a href="<?= $mode?>" hreflang="uz"  data-toggle="tooltip" title="<?= $q_config['language_name']['uz']?>" class="qtranxs_image <?= get_bloginfo('language')=='uz'?'active':'' ?> qtranxs_image_uz btn-<?= $style ?>">
 								<img style="display: <?php
 									 if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
-									 }else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/uz.gif" alt="O'zbekcha (uz)">
+									 }else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/uz.gif" alt="<?= $q_config['language_name']['uz']?>">
 								<span   style="display: <?php
 								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
-								}else{ echo 'none';}?>" >O'zbekcha</span>
+								}else{ echo 'none';}?>" ><?= $q_config['language_name']['uz']?></span>
 							</a>
 						</li>
 					<?php endif;?>
 					<?php if( $this->options['language_ru']): ?>
 						<li class="accessibility-language lang-ru">
-							<a href="<?= get_bloginfo('wpurl')?>/ru/" hreflang="ru" title="Русский (ru)" class="<?= get_bloginfo('language')=='ru-RU'?'active':'' ?> qtranxs_image qtranxs_image_ru btn-<?= $style ?>">
+							<?php $mode = $q_config['url_mode'];
+							if ($mode==1) {
+								$mode = $q_config['url_info']['scheme'].'://'.$q_config['url_info']['host'].$q_config['url_info']['wp-path'].'?lang=ru';
+							}else{
+								$mode = $q_config['url_info']['scheme'].'://'.$q_config['url_info']['host'].'/ru'.$q_config['url_info']['wp-path'];
+							}
+							?>
+							<a href="<?= $mode?>" hreflang="ru" data-toggle="tooltip" title="<?= $q_config['language_name']['ru']?>" class="<?= get_bloginfo('language')=='ru-RU'?'active':'' ?> qtranxs_image qtranxs_image_ru btn-<?= $style ?>">
 								<img style="display: <?php
 								if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
-								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/ru.gif" alt="Русский (ru)">
+								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/ru.gif" alt="<?= $q_config['language_name']['ru']?>">
 								<span style="display: <?php
 								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
-								}else{ echo 'none';}?>" >Русский</span>
+								}else{ echo 'none';}?>" ><?= $q_config['language_name']['ru']?></span>
 							</a>
 						</li>
 					<?php endif;?>
 					<?php if( $this->options['language_en']): ?>
 						<li class="accessibility-language lang-en">
-							<a href="<?= get_bloginfo('wpurl')?>/en/" hreflang="ru" title="English (en)" class="qtranxs_image qtranxs_image_en <?= get_bloginfo('language')=='en-US'?'active':'' ?> btn-<?= $style ?>">
+							<?php $mode = $q_config['url_mode'];
+							if ($mode==1) {
+								$mode = $q_config['url_info']['scheme'].'://'.$q_config['url_info']['host'].$q_config['url_info']['wp-path'].'?lang=en';
+							}else{
+								$mode = $q_config['url_info']['scheme'].'://'.$q_config['url_info']['host'].'/en'.$q_config['url_info']['wp-path'];
+							}
+							?>
+							<a href="<?= $mode?>" hreflang="ru" data-toggle="tooltip"  title="<?= $q_config['language_name']['en']?>" class="qtranxs_image qtranxs_image_en <?= get_bloginfo('language')=='en-US'?'active':'' ?> btn-<?= $style ?>">
 								<img style="display: <?php
 								if ($this->options['language_show']=='image' or $this->options['language_show']=='image_text' ){echo 'inline-block';
-								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/en.gif" alt="English (en)">
+								}else{ echo 'none';}?>" src="<?= AUSAY_URL?>/img/en.gif" alt="<?= $q_config['language_name']['en']?>">
 								<span   style="display: <?php
 								if ($this->options['language_show']=='text' or $this->options['language_show']=='image_text' ){echo 'inline-block';
-								}else{ echo 'none';}?>" >English </span>
+								}else{ echo 'none';}?>" ><?= $q_config['language_name']['en']?> </span>
 							</a>
 						</li>
 					<?php endif;?>
@@ -827,9 +853,9 @@ class AUS_tb_options {
 					<?php endif;?>
 					<?php if($this->options['search_page_id_check'] and $this->options['search_page_id'] and $this->options['search_page_id']==1): ?>
 						<li class="accessibility-search">
-							<form method="get" role="form" id="searchform" action="<?php bloginfo('home'); ?>/">
+							<form method="get" role="form" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 								<div id="hidden-search" style="display: inline-block">
-									<input  class="form-control search-form"  type="text"  autocomplete="off" placeholder="Search..."  value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" size="15" >
+									<input  class="form-control search-form"  type="text"  autocomplete="off" placeholder="Search..."  value="<?php echo get_search_query(); ?>" name="s" id="s" size="15" >
 								</div>
 								<a  class=" btn btn-<?= $style ?> search-button-simple">
 									<i class="glyphicon glyphicon-search"></i>

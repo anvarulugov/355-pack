@@ -41,8 +41,29 @@ class TClick_pack {
 	 * @return [initiating] [Fires on Wordpress init stage]
 	 */
 	public function init() {
-		add_shortcode( '[tc-flags]', array( $this, 'flags_shortcode' ) );
-		add_shortcode( '[tc-ac-modes]', array( $this, 'accessibility_shortcode' ) );
+		add_shortcode( 'tc-ac-modes', array( $this, 'accessibility_shortcode' ) );
+//		add_shortcode('show_languages', function () {
+//			global $q_config;
+////			echo "<pre>";
+////			print_r($q_config);
+////			exit;
+//			if (is_404()) {
+//				$url = get_option('home');
+//			}else{ $url = '';}
+//			$flag_location = qtranxf_flag_location();
+//			$html = "";
+//			foreach ($qtranxf_getSortedLanguages() as $language) {
+//				$classes = ['lang-' . $language];
+//				if ($language == $q_config['language']) {
+//					$classes[] = 'active';
+//				}
+//				$html .= '<a class="' . implode('', $classes) . '" href="' . $qtranxf_convertURL($url, $language, false, true) . '"
+//							 hreflang="' . $language . '" title="' . $q_config['language_name'][$language] . '">
+//							 <img src="' . $flag_location . $q_config['flag'][$language] . '" alt="' . $q_config['language_name'][$language] . '" />
+//						  </a>';
+//			}
+//			return $html;
+//		});
 	}
 
 	public function scripts() {
@@ -53,13 +74,9 @@ class TClick_pack {
 
 	}
 
-	public function flags_shortcode() {
-
-	}
 
 	public function accessibility_shortcode($item=null) {
 		$aus_accessibility_object = new AUS_tb_options($this->configs);
-
 		if ($item) {
 			return $aus_accessibility_object->display_aus_accessibility_item($item['item']);
 		}else {
