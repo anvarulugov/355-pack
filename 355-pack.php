@@ -40,7 +40,7 @@ class TClick_pack {
 
 	public function init() {
 		add_shortcode( 'tc-ac-modes', array( $this, 'accessibility_shortcode' ) );
-
+		add_filter('widget_text', 'do_shortcode');
 	}
 
 	public function scripts() {
@@ -49,6 +49,32 @@ class TClick_pack {
 
 	public function widgets_load() {
 
+	}
+
+	public function activate() {
+		$defaults = array(
+			'language_page_id' => '',
+			'rss_page_id' => '',
+			'voice_type' => '',
+			'voice_page_id' => '',
+			'bootstrap_style_page_id' => '',
+			'position_language' => '',
+			'language_uz' => '',
+			'language_show' => '',
+			'language_ru' => '',
+			'language_en' => '',
+			'accessibility_plugin_position' => '',
+			'voice_page_id' => '',
+			'mobile_page_id' => '',
+			'sitemap_page_id' => '',
+			'contact_page_id' => '',
+			'blind_mode' => '',
+			'search_page_id_check' => '',
+		);
+		$options = get_option( $this->configs['plugin_slug'] . '_plugin_options' );
+		if ( empty( $options )) {
+			update_option( $this->configs['plugin_slug'] . '_plugin_options', $defaults );
+		}
 	}
 
 

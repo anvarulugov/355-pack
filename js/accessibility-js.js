@@ -127,9 +127,9 @@ jQuery(document).ready(function ($) {
             sessionStorage.nextsize = zoom;
             sessionStorage.line_height = line_height;
         });
-        $('body .dropdown-accessibility').on('click', (function (e) {
-            $(this).parent().toggleClass('open');
-        }));
+        // $('body .dropdown-accessibility').on('click', (function (e) {
+        //     $(this).parent().toggleClass('open');
+        // }));
         if(typeof(Storage) !== "undefined") {
             if (sessionStorage.nextsize) {
                 $('body').css("font-size", sessionStorage.nextsize+'px');

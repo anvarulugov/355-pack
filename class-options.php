@@ -24,6 +24,26 @@ class AUS_tb_options {
 
 	function __construct( $configs = array() ) {
 
+		$defaults = array(
+			'language_page_id' => '',
+			'rss_page_id' => '',
+			'voice_type' => '',
+			'voice_page_id' => '',
+			'bootstrap_style_page_id' => '',
+			'position_language' => '',
+			'language_uz' => '',
+			'language_show' => '',
+			'language_ru' => '',
+			'language_en' => '',
+			'accessibility_plugin_position' => '',
+			'voice_page_id' => '',
+			'mobile_page_id' => '',
+			'sitemap_page_id' => '',
+			'contact_page_id' => '',
+			'blind_mode' => '',
+			'search_page_id_check' => '',
+		);
+
 		if ( ! empty( $configs ) ) {
 			$this->configs = $configs;
 			$this->options 	= get_option( $this->configs['plugin_slug'] . '_plugin_options' );
@@ -42,7 +62,7 @@ class AUS_tb_options {
 		wp_register_style( 'tclick-pack',  AUSAY_URL.'/css/accessbility-style.css' );
 		wp_enqueue_style( 'tclick-pack' );
 
-		if ($this->options['font_awesome']) {
+		if ($this->_esc_attr('font_awesome')) {
 			wp_register_style('tclick-awesome', AUSAY_URL . '/css/font-awesome.min.css', [], '1.0.0', true);
 			wp_enqueue_style('tclick-awesome');
 		}
@@ -712,7 +732,7 @@ class AUS_tb_options {
 	{
 		if($this->options){ ?>
 			<div style="clear: both"></div>
-			<?php if($this->options['language_page_id']): ?>
+			<?php if($this->_esc_attr('language_page_id')): ?>
 			<div class="main-accessibility pull-<?=$this->options['position_language']?>" >
 				<?php $style =  $this->options['bootstrap_style_page_id']?>
 				<ul>
@@ -786,7 +806,7 @@ class AUS_tb_options {
 				<?php $style =  $this->options['bootstrap_style_page_id']?>
 				<ul>
 
-					<?php if($this->options['rss_page_id']): ?>
+					<?php if($this->_esc_attr('rss_page_id')): ?>
 						<li class="accessibility-rss">
 							<a class="btn btn-<?= $style ?>" href="<?= get_bloginfo('rss_url')?>">
 								<i class="fa fa-rss"></i>
