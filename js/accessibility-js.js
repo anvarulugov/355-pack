@@ -126,6 +126,8 @@ jQuery(document).ready(function ($) {
             $('body').css("font-line", line_height);
             sessionStorage.nextsize = zoom;
             sessionStorage.line_height = line_height;
+
+            return false;
         });
         // $('body .dropdown-accessibility').on('click', (function (e) {
         //     $(this).parent().toggleClass('open');
