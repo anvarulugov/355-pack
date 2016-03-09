@@ -64,7 +64,7 @@ class TClick_pack {
 			'language_ru' => '',
 			'language_en' => '',
 			'accessibility_plugin_position' => '',
-			'voice_page_id' => '',
+//			'voice_page_id' => '',
 			'mobile_page_id' => '',
 			'sitemap_page_id' => '',
 			'contact_page_id' => '',

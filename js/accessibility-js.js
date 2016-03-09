@@ -129,9 +129,9 @@ jQuery(document).ready(function ($) {
 
             return false;
         });
-        // $('body .dropdown-accessibility').on('click', (function (e) {
-        //     $(this).parent().toggleClass('open');
-        // }));
+         $('body .dropdown-accessibility').on('click', (function (e) {
+             $(this).parent().toggleClass('open');
+         }));
         if(typeof(Storage) !== "undefined") {
             if (sessionStorage.nextsize) {
                 $('body').css("font-size", sessionStorage.nextsize+'px');

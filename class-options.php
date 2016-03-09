@@ -36,7 +36,7 @@ class AUS_tb_options {
 			'language_ru' => '',
 			'language_en' => '',
 			'accessibility_plugin_position' => '',
-			'voice_page_id' => '',
+//			'voice_page_id' => '',
 			'mobile_page_id' => '',
 			'sitemap_page_id' => '',
 			'contact_page_id' => '',
@@ -480,6 +480,19 @@ class AUS_tb_options {
 			)
 		);
 
+		add_settings_field(
+			'btn_class',
+			'<label for="btn_class">' . __( 'Button class', 'aus-basic' ) . '</label>',
+			array( $this, 'input'),
+			$this->plugin_slug . '_plugin_options',
+			$this->plugin_slug . '_plugin_settings_section',
+			array(
+				'id' => 'btn_class',
+				'type' => 'input',
+				'description' => __( 'Button class', 'aus-basic' ),
+			)
+		);
+
 
 		register_setting(
 			$this->plugin_slug . '_plugin_options_group',
@@ -760,7 +773,7 @@ class AUS_tb_options {
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if( $this->options['language_ru']): ?>
+					<?php if(isset($this->options['language_ru'])): ?>
 						<li class="accessibility-language lang-ru">
 							<?php $mode = $q_config['url_mode'];
 							if ($mode==1) {
@@ -779,7 +792,7 @@ class AUS_tb_options {
 							</a>
 						</li>
 					<?php endif;?>
-					<?php if( $this->options['language_en']): ?>
+					<?php if(isset( $this->options['language_en'])): ?>
 						<li class="accessibility-language lang-en">
 							<?php $mode = $q_config['url_mode'];
 							if ($mode==1) {
@@ -804,25 +817,31 @@ class AUS_tb_options {
 
 			<div class="main-accessibility pull-<?=$this->options['accessibility_plugin_position']?>" >
 				<?php $style =  $this->options['bootstrap_style_page_id']?>
+				<?php
+				$btn = '';
+				if (isset( $this->options['btn_class'])) {
+					$btn = $this->options['btn_class'];
+				}
+				?>
 				<ul>
 
 					<?php if($this->_esc_attr('rss_page_id')): ?>
 						<li class="accessibility-rss">
-							<a class="btn btn-<?= $style ?>" href="<?= get_bloginfo('rss_url')?>">
+							<a class="btn btn-<?= $style ?>  <?= $btn ?>" href="<?= get_bloginfo('rss_url')?>">
 								<i class="fa fa-rss"></i>
 							</a>
 						</li>
 					<?php endif;?>
 					<?php if($this->options['voice_page_id']): ?>
 						<li class="accessibility-bullhorn">
-							<a class="btn btn-<?= $style ?>"  href="#" data-toggle="modal" data-target="#bullhornModal">
+							<a class="btn btn-<?= $style ?> <?= $btn ?>"  href="#" data-toggle="modal" data-target="#bullhornModal">
 								<i class="glyphicon glyphicon-bullhorn"></i>
 							</a>
 						</li>
 					<?php endif;?>
 					<?php if($this->options['mobile_page_id']): ?>
 						<li class="accessibility-mobile">
-							<a href="#" class="btn btn-<?= $style ?>"
+							<a href="#" class="btn btn-<?= $style ?> <?= $btn ?>"
 									onclick="window.open(window.location,'mobile','location=1, scrollbars=1, toolbar=1, resizable=1, width=450, height=1000')">
 								<i class="glyphicon glyphicon-phone"></i>
 							</a>
@@ -830,14 +849,14 @@ class AUS_tb_options {
 					<?php endif;?>
 					<?php if($this->options['sitemap_page_id']): ?>
 						<li class="accessibility-sitemap">
-							<a class="btn btn-<?= $style ?>" href="<?php echo $this->options['sitemap_page_id'] ?>">
+							<a class="btn btn-<?= $style ?> <?= $btn ?>" href="<?php echo $this->options['sitemap_page_id'] ?>">
 								<i class="fa fa-sitemap"></i>
 							</a>
 						</li>
 					<?php endif;?>
 					<?php if($this->options['contact_page_id']): ?>
 						<li class="accessibility-contact">
-							<a class="btn btn-<?= $style ?>" href="<?= $this->options['contact_page_id']?>">
+							<a class="btn btn-<?= $style ?> <?= $btn ?>" href="<?= $this->options['contact_page_id']?>">
 								<i class="glyphicon glyphicon-envelope"></i>
 							</a>
 						</li>
@@ -845,7 +864,7 @@ class AUS_tb_options {
 					<?php if($this->options['blind_mode']): ?>
 						<li class="accessibility-blend">
 							<div class="dropdown" >
-								<a href="#" class="btn btn-<?= $style ?> dropdown-toggle dropdown-accessibility"  id="menu1"  type="button" data-toggle="dropdown" ><i class="glyphicon glyphicon-eye-open"></i>
+								<a href="#" class="btn btn-<?= $style ?> <?= $btn ?> dropdown-toggle dropdown-accessibility"  id="menu1"  type="button" data-toggle="dropdown" ><i class="glyphicon glyphicon-eye-open"></i>
 									<span class="accessibility-hidden-text">Ko'zi ojizlar uchun</span>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-accessibility"  role="menu" aria-labelledby="menu1">
@@ -866,7 +885,7 @@ class AUS_tb_options {
 
 					<?php if($this->options['search_page_id_check'] and $this->options['search_page_id'] and $this->options['search_page_id']==2): ?>
 						<li class="accessibility-search">
-							<a  data-toggle="modal" data-target="#searchModal" data-id="<?= $style ?>" class="search-toggler btn btn-<?= $style ?>  search-button-blur">
+							<a  data-toggle="modal" data-target="#searchModal" data-id="<?= $style ?>" class="search-toggler btn <?= $btn ?> btn-<?= $style ?>  search-button-blur">
 								<i class="glyphicon glyphicon-search"></i>
 							</a>
 						</li>
@@ -877,7 +896,7 @@ class AUS_tb_options {
 								<div id="hidden-search" style="display: inline-block">
 									<input  class="form-control search-form"  type="text"  autocomplete="off" placeholder="Search..."  value="<?php echo get_search_query(); ?>" name="s" id="s" size="15" >
 								</div>
-								<a  class=" btn btn-<?= $style ?> search-button-simple">
+								<a  class=" btn btn-<?= $style ?> <?= $btn ?> search-button-simple">
 									<i class="glyphicon glyphicon-search"></i>
 								</a>
 							</form>
@@ -888,7 +907,7 @@ class AUS_tb_options {
 				<?php if($this->options['voice_page_id']):?>
 				<!-- Modal -->
 				<div id="btn-voice" class="modal fade" role="dialog">
-					<button  sty le="display: none;" role="dialog" class="btn btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
+					<button  sty le="display: none;" role="dialog" class="btn <?= $btn ?> btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
 						<i class="glyphicon glyphicon-bullhorn"></i>
 					</button>
 					<section id="voice-section" style="display: none"></section>
@@ -906,7 +925,7 @@ class AUS_tb_options {
 								<p>Sahifadagi biron bir so'z, jumla yoki matnni belgilab, ushbu belgilangan sohani ovoz yordamida eshitishingiz mumkin.</p>
 							</div>
 							<div class="modal-footer" style="padding: 10px;">
-								<button type="button" class="btn btn-<?= $style ?>" data-dismiss="modal">Yopish</button>
+								<button type="button" class="btn <?= $btn ?> btn-<?= $style ?>" data-dismiss="modal">Yopish</button>
 							</div>
 						</div>
 					</div>
@@ -922,6 +941,12 @@ class AUS_tb_options {
 		if($this->options){ ?>
 			<div class="main-accessibility main-accessibility-item " >
 				<?php $style =  $this->options['bootstrap_style_page_id']?>
+				<?php
+				$btn = '';
+				if (isset( $this->options['btn_class'])) {
+					$btn = $this->options['btn_class'];
+				}
+				?>
 				<ul>
 
 					<?php if( $this->options['language_uz'] and $item=='uz'): ?>
@@ -963,7 +988,7 @@ class AUS_tb_options {
 
 					<?php if($this->options['rss_page_id'] and $item=='rss'): ?>
 						<li class="accessibility-rss">
-							<a class="btn btn-<?= $style ?>" href="<?= get_bloginfo('rss_url')?>">
+							<a class="btn btn-<?= $style ?> <?= $btn ?>" href="<?= get_bloginfo('rss_url')?>">
 								<i class="fa fa-rss"></i>
 							</a>
 						</li>
@@ -971,14 +996,14 @@ class AUS_tb_options {
 
 					<?php if($this->options['voice_page_id'] and $item=='voice'): ?>
 						<li class="accessibility-bullhorn">
-							<a class="btn btn-<?= $style ?>"  href="#" data-toggle="modal" data-target="#bullhornModal">
+							<a class="btn btn-<?= $style ?> <?= $btn ?>"  href="#" data-toggle="modal" data-target="#bullhornModal">
 								<i class="glyphicon glyphicon-bullhorn"></i>
 							</a>
 						</li>
 					<?php endif;?>
 					<?php if($this->options['mobile_page_id'] and $item=='mobile'): ?>
 						<li class="accessibility-mobile">
-							<a href="#" class="btn btn-<?= $style ?>"
+							<a href="#" class="btn btn-<?= $style ?> <?= $btn ?>"
 									onclick="window.open(window.location,'mobile','location=1, scrollbars=1, toolbar=1, resizable=1, width=450, height=1000')">
 								<i class="glyphicon glyphicon-phone"></i>
 							</a>
@@ -986,14 +1011,14 @@ class AUS_tb_options {
 					<?php endif;?>
 					<?php if($this->options['sitemap_page_id'] and $item=='site-map'): ?>
 						<li class="accessibility-sitemap">
-							<a class="btn btn-<?= $style ?>" href="<?php echo $this->options['sitemap_page_id'] ?>">
+							<a class="btn btn-<?= $style ?> <?= $btn ?>" href="<?php echo $this->options['sitemap_page_id'] ?>">
 								<i class="fa fa-sitemap"></i>
 							</a>
 						</li>
 					<?php endif;?>
 					<?php if($this->options['contact_page_id'] and $item=='contact'): ?>
 						<li class="accessibility-contact">
-							<a class="btn btn-<?= $style ?>" href="<?= $this->options['contact_page_id']?>">
+							<a class="btn btn-<?= $style ?> <?= $btn ?>" href="<?= $this->options['contact_page_id']?>">
 								<i class="glyphicon glyphicon-envelope"></i>
 							</a>
 						</li>
@@ -1001,7 +1026,7 @@ class AUS_tb_options {
 					<?php if($this->options['blind_mode'] and $item=='blind'): ?>
 						<li class="accessibility-blend">
 							<div class="dropdown" >
-								<a class="btn btn-<?= $style ?> dropdown-toggle dropdown-accessibility"  id="menu1"  type="button" data-toggle="dropdown" ><i class="glyphicon glyphicon-eye-open"></i>
+								<a class="btn btn-<?= $style ?> <?= $btn ?> dropdown-toggle dropdown-accessibility"  id="menu1"  type="button" data-toggle="dropdown" ><i class="glyphicon glyphicon-eye-open"></i>
 									<span class="accessibility-hidden-text">Ko'zi ojizlar uchun</span>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-accessibility"  role="menu" aria-labelledby="menu1">
@@ -1022,7 +1047,7 @@ class AUS_tb_options {
 
 					<?php if($this->options['search_page_id_check'] and $this->options['search_page_id'] and $this->options['search_page_id']==2 and $item=='search-modal'): ?>
 						<li class="accessibility-search">
-							<a  data-toggle="modal" data-target="#searchModal" data-id="<?= $style ?>" class="search-toggler btn btn-<?= $style ?>  search-button-blur">
+							<a  data-toggle="modal" data-target="#searchModal" data-id="<?= $style ?>" class="search-toggler btn btn-<?= $style ?> <?= $btn ?>  search-button-blur">
 								<i class="glyphicon glyphicon-search"></i>
 							</a>
 						</li>
@@ -1033,7 +1058,7 @@ class AUS_tb_options {
 								<div id="hidden-search" style="display: inline-block">
 									<input  class="form-control search-form"  type="text"   autocomplete="off" placeholder="Search..."  value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" size="15" >
 								</div>
-								<a  class=" btn btn-<?= $style ?> search-button-simple">
+								<a  class=" btn btn-<?= $style ?> <?= $btn ?> search-button-simple">
 									<i class="glyphicon glyphicon-search"></i>
 								</a>
 							</form>
@@ -1043,7 +1068,7 @@ class AUS_tb_options {
 
 				<!-- Modal -->
 			<?php if($this->options['voice_page_id'] and $item=='voice'):?>
-				<button id="btn-voice" style="display: none;" role="dialog" class="modal fade btn btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
+				<button id="btn-voice" style="display: none;" role="dialog" class="modal fade btn <?= $btn ?> btn-<?= $style ?>"  data-toggle="tooltip" data-placement="top" title="Belgilangan tugmani tinglash uchun quyidagi tugmani bosing.">
 					<i class="glyphicon glyphicon-bullhorn"></i>
 				</button>
 				<section id="voice-section" style="display: none"></section>
@@ -1060,7 +1085,7 @@ class AUS_tb_options {
 								<p>Sahifadagi biron bir so'z, jumla yoki matnni belgilab, ushbu belgilangan sohani ovoz yordamida eshitishingiz mumkin.</p>
 							</div>
 							<div class="modal-footer" style="padding: 10px;">
-								<button type="button" class="btn btn-<?= $style ?>" data-dismiss="modal">Yopish</button>
+								<button type="button" class="btn <?= $btn ?> btn-<?= $style ?>" data-dismiss="modal">Yopish</button>
 							</div>
 						</div>
 					</div>
